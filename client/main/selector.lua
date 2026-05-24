@@ -13,12 +13,14 @@ local function selector(options)
 
     if isInVehicle and not options.allow_in_vehicle then
         print("cant do this while in vehicle or mounted on horse?")
+        isInSelection = false
         return false
     end
 
     local isInHorse <const> = IsPedOnMount(playerPed)
     if isInHorse and not options.allow_on_horse then
         print("cant do this while mounted on horse?")
+        isInSelection = false
         return false
     end
 
@@ -62,6 +64,7 @@ local function selector(options)
     end
 
     if #playersNeeded == 0 then
+        isInSelection = false
         return false
     end
 
