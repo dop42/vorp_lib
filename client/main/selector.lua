@@ -47,10 +47,10 @@ local function selector(options)
                     local dist <const> = #(playerPos - targetPos)
                     if dist <= (options.distance or 8.0) then -- option for distance?
                         if options.allow_self and player == PlayerId() then
-                            playersNeeded[#playersNeeded] = player
+                            playersNeeded[#playersNeeded + 1] = player
                         else
                             if player ~= PlayerId() then
-                                playersNeeded[#playersNeeded] = player
+                                playersNeeded[#playersNeeded + 1] = player
                             end
                         end
                     end
@@ -77,9 +77,9 @@ local function selector(options)
             if interior == interior2 then
                 local coords <const> = GetWorldPositionOfEntityBone(targetPed, GetPedBoneIndex(targetPed, 21030))
                 local onScreen <const>, _x <const>, _y <const> = GetScreenCoordFromWorldCoord(coords.x, coords.y,
-                coords.z + .3)
+                    coords.z + .3)
                 if onScreen then
-                    players[#players] = {
+                    players[#players + 1] = {
                         id = GetPlayerServerId(player),
                         x = _x,
                         y = _y,
