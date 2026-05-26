@@ -1,3 +1,9 @@
+<0.4>
+- fixed selector
+- added more variables to CACHE
+- added gizmo module
+- fixed density
+- added copy to cliboard export
 <0.3>
 - added raycast module
 - added logger module 
