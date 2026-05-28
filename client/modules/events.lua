@@ -80,15 +80,19 @@ local event <const> = CLASS:Create({
                                 if self.developerMode then
                                     if not EVENTS_TO_IGNORE[eventAtIndex] then
                                         local data <const> = GameEvents[eventAtIndex]
-                                        if data.datasize ~= 0 then
-                                            local eventDataStruct <const> = Lib.DataView.ArrayBuffer(8 * data.datasize)
-                                            self.allocate(data, eventDataStruct)
-                                            local data_exists <const> = InvokeNative(0x57EC5FA4D4D6AFCA, eventgroup, i, eventDataStruct:Buffer(), data.datasize)
-                                            local datafields = {}
-                                            if data_exists then
-                                                datafields = self.getData(data, eventDataStruct)
+                                        if not data then
+                                            print("^3DEVMODE: EVENT AT INDEX^7", eventAtIndex, "does not exist in the data file")
+                                        else
+                                            if data.datasize ~= 0 then
+                                                local eventDataStruct <const> = Lib.DataView.ArrayBuffer(8 * data.datasize)
+                                                self.allocate(data, eventDataStruct)
+                                                local data_exists <const> = InvokeNative(0x57EC5FA4D4D6AFCA, eventgroup, i, eventDataStruct:Buffer(), data.datasize)
+                                                local datafields = {}
+                                                if data_exists then
+                                                    datafields = self.getData(data, eventDataStruct)
+                                                end
+                                                print(("^3DEVMODE: EVENT AT INDEX WITH GROUP %d^7 %s"):format(eventgroup), GameEvents[eventAtIndex]?.name, json.encode(datafields, { indent = true }))
                                             end
-                                            print("^3DEVMODE: EVENT AT INDEX^7", GameEvents[eventAtIndex]?.name, json.encode(datafields, { indent = true }))
                                         end
                                     end
                                 else

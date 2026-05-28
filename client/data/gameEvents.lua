@@ -73,6 +73,19 @@ local GameEvents = {
             [1] = { type = "int", data = "ped id that was ran over" },
         }
     },
+
+    [`EVENT_SHOCKING_ITEM_STOLEN`] = {
+        name = "EVENT_SHOCKING_ITEM_STOLEN",
+        hash = "0xFFFFFFFF",
+        datasize = 3,
+        group = 0,
+        dataelements = {
+            [0] = { type = "int", data = "ped id" },
+            [1] = { type = "int", data = "ped id" },
+            [2] = { type = "int", data = "carriable entity id" },
+        },
+    },
+
     [`EVENT_LOOT_COMPLETE`] = {
         name = "EVENT_LOOT_COMPLETE",
         hash = "0x52063E5B",
@@ -1743,7 +1756,7 @@ local GameEvents = {
             [2] = { type = "int", data = "inventory item hash" },
             [3] = { type = "int", data = "inventory item quantity" },
             [4] = { type = "int", data = "unknown" },
-            [5] = { type = "int", data = "unknown" },
+            [5] = { type = "int", data = "state" }, -- 0 started 1 finished ?
             [6] = { type = "int", data = "unknown" },
             [7] = { type = "int", data = "unknown" },
             [8] = { type = "int", data = "scenario point id" },
