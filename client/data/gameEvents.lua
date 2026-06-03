@@ -1702,7 +1702,7 @@ local GameEvents = {
         group = 0,
         dataelements = {
             [0] = { type = "int", data = "prompt type id ( [list](#prompt-type-ids) )" },
-            [1] = { type = "int", data = "unknown" },
+            [1] = { type = "int", data = "player" },
             [2] = { type = "int", data = "target entity id" },
             [3] = { type = "int", data = "unknown (??? discovered inventory item)" },
             [4] = { type = "float", data = "player ped coord x" },
