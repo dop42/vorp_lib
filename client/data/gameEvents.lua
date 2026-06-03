@@ -59,8 +59,8 @@ local GameEvents = {
         datasize = 2,
         group = 0,
         dataelements = {
-            [0] = { type = "int", data = "unknown" },
-            [1] = { type = "int", data = "inventory item hash" },
+            [0] = { type = "int", data = "toPedId" },
+            [1] = { type = "int", data = "toEntityId" },
         }
     },
     [`EVENT_RAN_OVER_PED`] = {
