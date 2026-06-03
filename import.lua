@@ -135,22 +135,25 @@ end
 _ENV.Import = Import
 
 
-
 if side == "client" then
     ---@class CACHE
-    ---@field Ped integer player ped id
-    ---@field Player integer player id
-    ---@field ServerID integer player server id
-    ---@field Mount integer current mounted ped id
-    ---@field LastMount integer last mounted ped id
-    ---@field Vehicle integer current in vehicle ped id
-    ---@field LastVehicle integer last in vehicle ped id
-    ---@field Weapon integer current held weapon ped id
-    ---@field LastWeapon integer last held weapon ped id
+    ---@field public Ped integer player ped id
+    ---@field public Player integer player id
+    ---@field public ServerID integer player server id
+    ---@field public Mount integer current mounted ped id
+    ---@field public LastMount integer last mounted ped id
+    ---@field public Vehicle integer current in vehicle ped id
+    ---@field public LastVehicle integer last in vehicle ped id
+    ---@field public Weapon integer current held weapon ped id
+    ---@field public LastWeapon integer last held weapon ped id
+    ---@field public OnPedChange fun(pedId: integer) when player ped change the callback is called with the new ped id
     CACHE = {}
+    CACHE.OnPedChange = function(callback)
+        CACHE.OnPedChangeCallback = callback
+    end
 
     CreateThread(function()
-        CACHE.Ped = 0
+        CACHE.Ped = PlayerPedId()
         CACHE.Player = PlayerId()
         CACHE.ServerID = GetPlayerServerId(CACHE.Player)
         CACHE.Mount = 0
@@ -172,6 +175,9 @@ if side == "client" then
             local ped <const> = PlayerPedId()
             if CACHE.Ped ~= ped then
                 CACHE.Ped = ped
+                if CACHE.OnPedChangeCallback then
+                    CACHE.OnPedChangeCallback(CACHE.Ped)
+                end
             end
 
             if not CACHE.SkipMount then
