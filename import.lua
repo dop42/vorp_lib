@@ -52,7 +52,7 @@ function importModules:GetPath(file)
     elseif file:sub(1, 1) == "/" or file:sub(1, 1) == "." then
         -- own resource contains / or .
         resource = GetCurrentResourceName()
-        path = file
+        path = file:sub(2)
     else
         -- lib contains no symbols
         resource = "vorp_lib"
@@ -148,6 +148,7 @@ if side == "client" then
     ---@field public LastWeapon integer last held weapon ped id
     ---@field public OnPedChange fun(pedId: integer) when player ped change the callback is called with the new ped id
     CACHE = {}
+
     CACHE.OnPedChange = function(callback)
         CACHE.OnPedChangeCallback = callback
     end
