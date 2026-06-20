@@ -346,16 +346,12 @@ local zone <const> = CLASS:Create({
     end,
 
     StartDebugLoop = function(self)
-        if self.debugThread then
-            return
-        end
-
-        self.debugThread = CreateThread(function()
+       CreateThread(function()
             while self.isActive and self.debug do
                 self:DrawDebug()
                 Wait(0)
             end
-            self.debugThread = nil
+        
         end)
     end,
 
