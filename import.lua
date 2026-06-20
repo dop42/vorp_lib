@@ -153,6 +153,10 @@ if side == "client" then
         CACHE.OnPedChangeCallback = callback
     end
 
+    CACHE.OnPlayerDeath = function(callback)
+        CACHE.OnPlayerDeathCallback = callback
+    end
+
     CreateThread(function()
         CACHE.Ped = PlayerPedId()
         CACHE.Player = PlayerId()
@@ -227,6 +231,11 @@ if side == "client" then
                 local isDead <const> = IsPlayerDead(CACHE.Player)
                 if isDead ~= CACHE.IsDead then
                     CACHE.IsDead = isDead
+                    if isDead then
+                        if CACHE.OnPlayerDeathCallback then
+                            CACHE.OnPlayerDeathCallback()
+                        end
+                    end
                 end
             end
         end
